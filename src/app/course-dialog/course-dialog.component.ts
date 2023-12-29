@@ -60,10 +60,10 @@ export class CourseDialogComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    //valueChanges ist ein Observable das bei jeder Änderung einen Wert ausgibt
+    //valueChanges ist ein Observable das bei jeder Formularänderung einen Wert ausgibt
     this.form.valueChanges
       .pipe(
-        //nur wenn das formular valide ist, dann in den stream übernehmen
+        //nur wenn das Formular valide ist, dann in den Stream übernehmen
         filter(() => this.form.valid),
         debounceTime(1000),
         tap((changes) => console.log("Form changes:", changes)),

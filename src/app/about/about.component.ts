@@ -16,11 +16,11 @@ export class AboutComponent implements OnInit {
     const source2$ = of(4, 5, 6).pipe(delay(5000));
     const source3$ = of(7, 8, 9);
 
-    //concat warte auf die streams bis diese complette sind bevor es zum nächsten geht
+    //concat wartet auf die Streams bis dieser completed, sind bevor es zum nächsten geht
     const result$ = concat(source1$, source2$, source3$);
     //result$.subscribe(console.log);
 
-    //merge gibt alle werte sofort aus wenn diese kommen
+    //merge gibt alle Werte sofort aus wenn diese kommen.
     const result2$ = merge(source1$, source2$, source3$);
     result2$.subscribe(console.log);
 

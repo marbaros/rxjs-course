@@ -61,12 +61,12 @@ export class CourseComponent implements OnInit, AfterViewInit {
       startWith(""),
       //warte etwas => also wenn sich für 500ms keine Werte kommen dann letzten abschicken
       debounceTime(500),
-      //ignorie alles und lasse nur werte alle 500ms durch.
+      //ignorie alles und lasse nur Werte alle 500ms durch.
       //throttleTime(500)
 
-      //und schicke nur wenn sich die Werte geändert haben
+      //filtere doppelt und schicke Werte sich diese geändert haben
       distinctUntilChanged(),
-      //sobald ein nuer Wert komm dann breche den aktuellen request ab ( unsubsribe ) und erzeuge ein neuen request
+      //sobald ein nuer Wert kommt, breche den aktuellen Request ab ( unsubsribe ) und erzeuge ein neuen Request
       switchMap((searchTerm) => this.loadLessons(searchTerm))
     );
 

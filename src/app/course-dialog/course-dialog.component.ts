@@ -32,9 +32,17 @@ export class CourseDialogComponent implements OnInit, AfterViewInit {
   form: FormGroup;
   course: Course;
 
-  @ViewChild("saveButton", { static: true }) saveButton: ElementRef;
+  @ViewChild("saveButton", {
+    read: ElementRef,
+    static: true,
+  })
+  saveButton: ElementRef;
 
-  @ViewChild("searchInput", { static: true }) searchInput: ElementRef;
+  @ViewChild("searchInput", {
+    read: ElementRef,
+    static: true,
+  })
+  searchInput: ElementRef;
 
   constructor(
     private fb: FormBuilder,
@@ -68,7 +76,12 @@ export class CourseDialogComponent implements OnInit, AfterViewInit {
       .subscribe();
   }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit(): void {
+    fromEvent(this.saveButton.nativeElement, "click")
+      //Wichtig: exhaustMap ignoriert alle werte solange das aktuelle Observable aus saveCourses noch nicht completed ist!!!
+      .pipe(exhaustMap(() => this.saveCourses(this.form.value)))
+      .subscribe((a) => console.log("btn clicked", a));
+  }
 
   close() {
     this.dialogRef.close();

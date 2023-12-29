@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
 
     const courses$: Observable<Course[]> = http$.pipe(
       map((response) => Object.values(response["payload"])),
+      //puffere den letzen Wert, hier courses[] sobald eine neue Subscription kommt, erhält diese den wert aus dem puffer
       shareReplay<Course[]>()
     );
 
